@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>GitHub ZIP Folder Uploader</title>
+  <style>
+    body { font-family: system-ui, Arial; margin: 24px; max-width: 900px; }
+    input[type=text], input[type=password], input[type=file] { width: 100%; padding: 8px; margin: 6px 0; box-sizing: border-box; }
+    textarea.log { width: 100%; height: 360px; background: #111; color: #eee; padding: 10px; white-space: pre-wrap; overflow:auto; border-radius:6px; }
+    .btn { padding: 10px 18px; margin-top: 8px; cursor: pointer; }
+    label { font-weight: 600; display:block; margin-top:10px; }
+  </style>
+</head>
+<body>
+  <h2>GitHub ZIP → Repository (Dynamic)</h2>
+  <p>Upload a ZIP of your project. Provide your GitHub credentials (token/email/username) and the repository URL. The app will extract the ZIP and push files to your repo. Nothing is stored permanently.</p>
+  <form method="post" enctype="multipart/form-data">
+    <label>ZIP file (project)</label>
+    <input type="file" name="zipfile" accept=".zip" required>
+    <label>GitHub repository URL (HTTPS) e.g. https://github.com/username/repo.git</label>
+    <input type="text" name="repo" required>
+    <label>GitHub username</label>
+    <input type="text" name="user" placeholder="your-username">
+    <label>GitHub email</label>
+    <input type="text" name="email" placeholder="you@example.com">
+    <label>GitHub Personal Access Token (PAT)</label>
+    <input type="password" name="token" autocomplete="new-password" required>
+    <br>
+    <button class="btn" type="submit">Upload & Push</button>
+  </form>
+
+  {% if log %}
+    <h3>Operation Log</h3>
+    <textarea class="log" readonly>{{ log }}</textarea>
+  {% endif %}
+</body>
+</html>
